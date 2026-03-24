@@ -9,7 +9,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'MT_VERSION', '3.0.0' );
+define( 'MT_VERSION', '1.0.2' );
 define( 'MT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define('MT_TABLE_MIGRATIONS', $wpdb->prefix . 'mt_migrations');
