@@ -159,14 +159,21 @@
 .mt-add-change {
     display: flex; gap: 10px; align-items: flex-start; margin-bottom: 20px; padding: 14px 18px;
     background: var(--mt-surface); border: 1px solid var(--mt-border);
-    border-radius: var(--mt-r-lg);
+    border-radius: var(--mt-r-lg); align-items: center;
 }
-.mt-add-change input, .mt-add-change textarea {
-    font-family: inherit; font-size: 13px; padding: 8px 12px;
-    border: 1px solid var(--mt-border); border-radius: var(--mt-r);
-    background: var(--mt-raised); color: var(--mt-text); outline: none; resize: none;
+.mt-add-change input[type=text], .mt-add-change textarea {
+    font-family: inherit;
+    font-size: 13px;
+    border: 1px solid var(--mt-border);
+    border-radius: var(--mt-r);
+    background: var(--mt-raised);
+    color: var(--mt-text);
+    outline: none;
+    resize: none;
     transition: border-color var(--mt-tr), box-shadow var(--mt-tr);
 }
+.mt-add-change textarea { padding: 10px 14px; }
+.mt-add-change input[type=text] { padding: 4px 12px; }
 .mt-add-change input { flex: 1; }
 .mt-add-change textarea { flex: 1; min-height: 34px; }
 .mt-add-change input:focus, .mt-add-change textarea:focus { border-color: var(--mt-pink); box-shadow: 0 0 0 3px rgba(228,5,137,.15); }
@@ -317,12 +324,14 @@
 
 .mt-modal h3 { font-size: 17px; font-weight: 700; margin: 0 0 18px; color: var(--mt-text) !important; background: none !important; text-shadow: none; }
 .mt-modal label { display: block; font-size: 12px; font-weight: 600; color: var(--mt-text3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .4px; }
-.mt-modal input, .mt-modal textarea {
-    width: 100%; font-family: inherit; font-size: 14px; padding: 10px 14px;
+.mt-modal input[type=text], .mt-modal textarea {
+    width: 100%; font-family: inherit; font-size: 14px;
     border: 1px solid var(--mt-border); border-radius: var(--mt-r);
     background: var(--mt-raised); color: var(--mt-text); outline: none; resize: vertical;
     transition: border-color var(--mt-tr), box-shadow var(--mt-tr);
 }
+.mt-modal textarea { padding: 10px 14px; }
+.mt-modal input[type=text] { padding: 4px 12px; }
 .mt-modal input::placeholder, .mt-modal textarea::placeholder { color: var(--mt-text4); }
 .mt-modal input:focus, .mt-modal textarea:focus { border-color: var(--mt-pink); box-shadow: 0 0 0 3px rgba(228,5,137,.15); }
 .mt-modal__actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
