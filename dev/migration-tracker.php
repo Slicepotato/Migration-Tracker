@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define( 'MT_VERSION', '3.0.0' );
 define( 'MT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define('MT_TABLE_MIGRATIONS', $wpdb->prefix . 'mt_migrations');
+define('MT_TABLE_CHANGES', $wpdb->prefix . 'mt_changes');
 
 /* =========================================================================
    DATABASE
@@ -19,6 +21,7 @@ define( 'MT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 function mt_create_tables() {
     global $wpdb;
+
     $charset = $wpdb->get_charset_collate();
     $m = $wpdb->prefix . 'mt_migrations';
     $c = $wpdb->prefix . 'mt_changes';
@@ -49,8 +52,13 @@ function mt_create_tables() {
     ) {$charset};";
 
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-    dbDelta( $sql );
+    dbDelta($sql);
+
+    // Add defaults if not present
+    add_option('mt_delete_data_on_uninstall', 0);
+    add_option('mt_version', MT_VERSION);
 }
+
 register_activation_hook( __FILE__, 'mt_create_tables' );
 
 /* =========================================================================
@@ -90,6 +98,7 @@ function mt_render_admin_page() {
                 <h1>Build Tracker</h1>
             </div>
             <button id="mt-new-migration-btn" class="mt-btn mt-btn--primary"><span class="dashicons dashicons-plus-alt2"></span> New Build</button>
+            <button id="mt-settings-btn" class="mt-btn mt-btn--ghost"><span class="dashicons dashicons-admin-generic"></span> Settings</button>
         </div>
 
         <!-- BUILD LIST -->
@@ -193,8 +202,29 @@ function mt_render_admin_page() {
             </div>
         </div>
 
+        <!-- SETTINGS MODAL -->
+        <div id="mt-settings-overlay" class="mt-modal-overlay" style="display:none;">
+            <div class="mt-modal mt-modal--wide">
+                <h3>Data Management</h3>
+                <label class="mt-checkbox-label" for="mt-delete-data">
+                    <input type="checkbox" id="mt-delete-data">
+                    <span class="mt-checkbox-text">Delete all plugin data on uninstall</span>
+                </label>
+                <p style="margin-top:10px; opacity:0.7; font-size:0.9em;">
+                    Enable this if you want all builds, changes, and attachments removed when deleting the plugin.
+                </p>
+                <div class="mt-modal__actions">
+                    <button id="mt-settings-close" class="mt-btn mt-btn--ghost">Close</button>
+                </div>
+            </div>
+        </div>
+
     </div>
     <?php
+    
+    if ( mt_check_github_update() ) {
+        echo '<div class="notice notice-warning"><p>A new version of Build Tracker is available! <a href="https://github.com/Slicepotato/Migration-Tracker/releases/latest" target="_blank">View Release</a></p></div>';
+    }
 }
 
 /* =========================================================================
@@ -325,3 +355,24 @@ add_action( 'wp_ajax_mt_update_attachments', function () {
     }
     wp_send_json_success( [ 'attachment_files' => $files ] );
 });
+
+function mt_check_github_update() {
+    $current_version = MT_VERSION;
+    $url = 'https://api.github.com/repos/Slicepotato/Migration-Tracker/releases/latest';
+
+    $args = [
+        'headers' => ['User-Agent' => 'BuildTracker-Plugin'],
+        'timeout' => 5
+    ];
+
+    $response = wp_remote_get($url, $args);
+
+    if (is_wp_error($response)) return false;
+
+    $data = json_decode(wp_remote_retrieve_body($response), true);
+    if (!$data || empty($data['tag_name'])) return false;
+
+    $latest_version = ltrim($data['tag_name'], 'v');
+
+    return version_compare($latest_version, $current_version, '>');
+}

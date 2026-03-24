@@ -331,5 +331,35 @@
             frame.on('select', () => { frame.state().get('selection').toJSON().forEach(att => { if (!attachCurrentIds.includes(att.id)) attachCurrentIds.push(att.id); }); saveAttachments(); });
             frame.open();
         });
+
+        /* =================================================================
+        SETTINGS MODAL
+        ================================================================= */
+
+        const settingsBtn = $('#mt-settings-btn');
+        const settingsOverlay = $('#mt-settings-overlay');
+        const deleteDataCheckbox = $('#mt-delete-data');
+
+        if (settingsBtn && settingsOverlay && deleteDataCheckbox) {
+
+            // Open modal
+            settingsBtn.addEventListener('click', () => settingsOverlay.style.display = 'flex');
+
+            // Close modal
+            $('#mt-settings-close').addEventListener('click', () => settingsOverlay.style.display = 'none');
+
+            // Load current setting
+            ajax('mt_get_settings').then(res => {
+                if (res && res.delete_data_on_uninstall) {
+                    deleteDataCheckbox.checked = true;
+                }
+            }).catch(() => { /* fail silently */ });
+
+            // Save setting on toggle
+            deleteDataCheckbox.addEventListener('change', () => {
+                const checked = deleteDataCheckbox.checked ? 1 : 0;
+                ajax('mt_save_settings', { delete_data: checked }).catch(() => { /* fail silently */ });
+            });
+        }
     });
 })();
