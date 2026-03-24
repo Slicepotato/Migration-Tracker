@@ -3,7 +3,7 @@
    ========================================================================== */
 
 :root {
-    --mt-bg:      #000000;
+    --mt-bg:      #1a1a1a;
     --mt-surface: #1c1926;
     --mt-raised:  #242131;
     --mt-border:  #2e2a3d;
@@ -38,8 +38,10 @@
 }
 
 /* Force the WP admin page bg black behind our plugin */
-#wpbody-content { background: #000 !important; }
-#wpbody { background: #000 !important; }
+#wpbody-content { background: var(--mt-bg) !important; }
+#wpbody { background: var(--mt-bg) !important; }
+#wpcontent { padding-left: 0px; }
+#wpwrap { background-color: var(--mt-bg);}
 
 .mt-wrap * { box-sizing: border-box; }
 .mt-wrap h1, .mt-wrap h2, .mt-wrap h3, .mt-wrap h4,
