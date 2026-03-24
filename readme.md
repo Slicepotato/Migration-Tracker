@@ -20,3 +20,6 @@ Ideal for small agencies and teams that need structured, auditable workflows for
 
 ### v1.0.4
 - (03/24/2026) Styling refinements to form fields
+
+### v1.0.5
+- (03/24/2026) Added more descriptive text to colum headings

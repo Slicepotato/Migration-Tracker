@@ -2,14 +2,14 @@
 /**
  * Plugin Name: Build Tracker
  * Description: Track and approve changes across website builds with drag-and-drop workflow and file attachments.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Blink Digital Agency
  * Text Domain: migration-tracker
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'MT_VERSION', '1.0.4' );
+define( 'MT_VERSION', '1.0.5' );
 define( 'MT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define('MT_TABLE_MIGRATIONS', $wpdb->prefix . 'mt_migrations');
@@ -149,7 +149,7 @@ function mt_render_admin_page() {
             <!-- BOARD -->
             <div class="mt-board">
                 <div class="mt-col" id="mt-col-pending">
-                    <div class="mt-col__header mt-col__header--pending"><span class="mt-col__dot mt-col__dot--pending"></span> Completed Items <span class="mt-col__count" id="mt-pending-count">0</span></div>
+                    <div class="mt-col__header mt-col__header--pending"><span class="mt-col__dot mt-col__dot--pending"></span> Completed Items (Staging)<span class="mt-col__count" id="mt-pending-count">0</span></div>
                     <div class="mt-col__body" id="mt-pending-body" data-status="pending"></div>
                 </div>
                 <div class="mt-col" id="mt-col-approved">
@@ -157,7 +157,7 @@ function mt_render_admin_page() {
                     <div class="mt-col__body" id="mt-approved-body" data-status="approved"></div>
                 </div>
                 <div class="mt-col" id="mt-col-testing">
-                    <div class="mt-col__header mt-col__header--testing"><span class="mt-col__dot mt-col__dot--testing"></span> Post-Launch Testing <span class="mt-col__count" id="mt-testing-count">0</span></div>
+                    <div class="mt-col__header mt-col__header--testing"><span class="mt-col__dot mt-col__dot--testing"></span> Post-Launch Testing (Live)<span class="mt-col__count" id="mt-testing-count">0</span></div>
                     <div class="mt-col__body" id="mt-testing-body" data-status="testing"></div>
                 </div>
             </div>
