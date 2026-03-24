@@ -1,1 +1,1 @@
-# This is the start cof a Bespoke kanbam/trello style migration tracker
+# This is the start of a vespoke kanban/trello style migration tracker
