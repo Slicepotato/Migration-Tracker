@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Build Tracker
  * Description: Track and approve changes across website builds with drag-and-drop workflow and file attachments.
- * Version: 3.0.0
+ * Version: 1.0.3
  * Author: Blink Digital Agency
  * Text Domain: migration-tracker
  */
