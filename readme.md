@@ -18,5 +18,5 @@ Ideal for small agencies and teams that need structured, auditable workflows for
 - (03/24/2026) DB preservation (or not) upon deactivation/uninstallation
 - (03/24/2026) uninstallation procedures
 
-### v1.0.3
+### v1.0.4
 - (03/24/2026) Styling refinements to form fields
