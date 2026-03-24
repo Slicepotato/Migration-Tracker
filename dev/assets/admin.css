@@ -173,7 +173,7 @@
     transition: border-color var(--mt-tr), box-shadow var(--mt-tr);
 }
 .mt-add-change textarea { padding: 10px 14px; }
-.mt-add-change input[type=text] { padding: 4px 12px; }
+.mt-add-change input[type=text] { padding: 6px 12px; }
 .mt-add-change input { flex: 1; }
 .mt-add-change textarea { flex: 1; min-height: 34px; }
 .mt-add-change input:focus, .mt-add-change textarea:focus { border-color: var(--mt-pink); box-shadow: 0 0 0 3px rgba(228,5,137,.15); }
